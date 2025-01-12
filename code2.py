@@ -2,11 +2,6 @@ import torch
 import yfinance as yf
 from datetime import date
 
-end_date = date.today().strftime("%Y-%m-%d")
-start_date = '1990-01-01'
-
-df = yf.download('AAPL', start=start_date, end=end_date)
-
 import seaborn as sns
 from pylab import rcParams
 import matplotlib.pyplot as plt
