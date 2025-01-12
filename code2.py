@@ -25,8 +25,6 @@ from torch.utils.data import DataLoader, TensorDataset
 from sklearn.metrics import mean_squared_error, r2_score
 from collections import defaultdict
 
-%matplotlib inline
-
 sns.set(style='whitegrid', palette='muted', font_scale=1.2)
 
 Colour_Palette = ['#01BEFE', '#FF7D00', '#FFDD00', '#FF006D', '#ADFF02', '#8F00FF']
