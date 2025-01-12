@@ -10,6 +10,7 @@ from tqdm.notebook import tqdm
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.dates as mdates
 import math
+from data_plot import plot
 
 # Set seaborn style
 sns.set(style='whitegrid', palette='muted', font_scale=1.2)
@@ -21,33 +22,6 @@ end_date = date.today().strftime("%Y-%m-%d")
 start_date = '1990-01-01'
 
 df = yf.download('AAPL', start=start_date, end=end_date)
-
-# Function to plot data
-def data_plot(df, columns=['Open']):
-    # Check if the specified columns are present in the DataFrame
-    if not all(col in df.columns for col in columns):
-        raise ValueError(f"Some specified columns are not in the DataFrame: {columns}")
-    
-    # Plot line charts for selected columns
-    df_plot = df[columns].copy()  # Only select specific columns if needed
-
-    # If there are no columns to plot, raise an error
-    if df_plot.empty:
-        raise ValueError("No data available to plot. The DataFrame is empty.")
-
-    # Calculate number of rows and columns for subplots
-    ncols = 2
-    nrows = int(np.ceil(df_plot.shape[1] / ncols))  # Use np.ceil to ensure at least 1 row if necessary
-    fig, ax = plt.subplots(nrows=nrows, ncols=ncols, sharex=True, figsize=(14, 7))
-
-    for i, ax in enumerate(fig.axes):
-        if i < df_plot.shape[1]:  # Avoid out of bounds error if there are fewer than expected subplots
-            sns.lineplot(data=df_plot.iloc[:, i], ax=ax)
-            ax.tick_params(axis="x", rotation=30, labelsize=10, length=0)
-            ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-
-    fig.tight_layout()
-    plt.show()
 
 # Plot the 'Open' price data (you can add more columns here if needed)
 data_plot(df, columns=['Open'])
@@ -75,3 +49,4 @@ print(f'Scaled training data (first 5 rows):\n{scaled_train[:5]}')
 # Scale testing data using the same scaler
 scaled_test = scaler.transform(dataset_test)  # Use transform() for test data
 print(f'Scaled testing data (first 5 rows):\n{scaled_test[:5]}')
+
