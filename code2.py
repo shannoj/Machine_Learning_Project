@@ -11,20 +11,10 @@ from sklearn.preprocessing import MinMaxScaler
 import matplotlib.dates as mdates
 import math
 from data_plot import plot
-
-# Set seaborn style
-sns.set(style='whitegrid', palette='muted', font_scale=1.2)
-Colour_Palette = ['#01BEFE', '#FF7D00', '#FFDD00', '#FF006D', '#ADFF02', '#8F00FF']
-sns.set_palette(sns.color_palette(Colour_Palette))
-
-# Download stock data (Apple)
-end_date = date.today().strftime("%Y-%m-%d")
-start_date = '1990-01-01'
-
-df = yf.download('AAPL', start=start_date, end=end_date)
+from get_data import df
 
 # Plot the 'Open' price data (you can add more columns here if needed)
-data_plot(df, columns=['Open'])
+plot(df, columns=['Open'])
 
 # Train-test split
 training_data_len = math.ceil(len(df) * 0.8)
